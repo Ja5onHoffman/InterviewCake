@@ -1,0 +1,19 @@
+
+
+
+def reverse_words(message):
+
+    # Decode the message by reversing the words
+    if len(message) > 1:
+        l = len(message) - 1
+        i = 0
+        while i < l:
+            temp = message[l]
+            message[l] = message[i]
+            message[i] = temp
+            l -= 1
+            i += 1
+
+message = [ 'c', 'a', 'k', 'e', ' ',
+            'p', 'o', 'u', 'n', 'd', ' ',
+            's', 't', 'e', 'a', 'l' ]
