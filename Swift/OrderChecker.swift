@@ -71,6 +71,41 @@ func isFirstComeFirstServed(takeOutOrders: [Int], dineInOrders: [Int], servedOrd
     return true
 }
 
+// Their recursive
+func isFirstComeFirstServed(takeOutOrders: [Int], dineInOrders: [Int], servedOrders: [Int]) -> Bool {
+
+    // base case
+    if servedOrders.count == 0 {
+        return true
+    }
+
+    // if the first order in servedOrders is the same as the
+    // first order in takeOutOrders
+    // (making sure first that we have an order in takeOutOrders)
+    if takeOutOrders.count > 0 && takeOutOrders[0] == servedOrders[0] {
+
+        // take the first order off takeOutOrders and servedOrders and recurse
+        return isFirstComeFirstServed(takeOutOrders: Array(takeOutOrders[1...]),
+                                      dineInOrders: dineInOrders,
+                                      servedOrders: Array(servedOrders[1...]))
+
+    // if the first order in servedOrders is the same as the first
+    // in dineInOrders
+    } else if dineInOrders.count > 0 && dineInOrders[0] == servedOrders[0] {
+
+        // take the first order off dineInOrders and servedOrders and recurse
+        return isFirstComeFirstServed(takeOutOrders: takeOutOrders,
+                                      dineInOrders: Array(dineInOrders[1...]),
+                                      servedOrders: Array(servedOrders[1...]))
+
+    // first order in servedOrders doesn't match the first in
+    // takeOutOrders or dineInOrders, so we know it's not first-come, first-served
+    } else {
+        return false
+    }
+}
+
+
 // tests
 
 import XCTest
